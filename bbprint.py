@@ -11,17 +11,15 @@ try:
 	pwd = sys.argv.index('-p') + 1
 	username = sys.argv[usr]
 	password = sys.argv[pwd]
-	credentials = open('user.py', 'w')
-	credentials.write('USERNAME = 0x' + str(encode(username)) + '\n')
-	credentials.write('PASSWORD = 0x' + str(encode(password)) + '\n')
-	credentials.close()
+	with open('user.py', 'w') as credentials:
+		credentials.write('USERNAME = 0x' + str(encode(username)) + '\n')
+		credentials.write('PASSWORD = 0x' + str(encode(password)) + '\n')
 except:
 	pass #no-op
-	#print 'Username and password not detected. Loading stored credentials.'
-	#print 'If you want to use a new username and password use the \'-u\' and \'-p\' tags'
+	print 'Username and password not detected. Loading stored credentials.'
+	print 'If you want to use a new username and password use the \'-u\' and \'-p\' tags'
 
 from auth import authenticate
-
 s = authenticate('https://blackboard.andrew.cmu.edu')
 #print 'Blackboard authentication failed.  Ensure your username and password are correct.'
 
