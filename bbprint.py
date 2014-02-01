@@ -1,27 +1,30 @@
 #from pyquery import PyQuery as pq
 from datetime import datetime
 from urllib import urlencode
+from cryptor import encode
 import re, json, os, sys
-#print os.getcwd()
+
+# check for credentials, encode and store them if found
 try:
 	usr = sys.argv.index('-u') + 1
 	pwd = sys.argv.index('-p') + 1
 	username = sys.argv[usr]
 	password = sys.argv[pwd]
 	credentials = open('user.py', 'w')
-	credentials.write('USERNAME = \'' + username + '\'\n')
-	credentials.write('PASSWORD = \'' + password + '\'\n')
+	credentials.write('USERNAME = 0x' + str(encode(username)) + '\n')
+	credentials.write('PASSWORD = 0x' + str(encode(password)) + '\n')
 	credentials.close()
 except:
-	usr = 1
-	#print 'Username and password not detected.'
+	#print 'Username and password not detected. Loading stored credentials.'
+	#print 'If you want to use a new username and password use the \'-u\' and \'-p\' tags'
 
 from auth import authenticate
 
 s = authenticate('https://blackboard.andrew.cmu.edu')
-print s.get('https://blackboard.andrew.cmu.edu/webapps').content
+#print 'Blackboard authentication failed.  Ensure your username and password are correct.'
+#print s.get('https://blackboard.andrew.cmu.edu/webapps').content
 
-#TODO Remove
+#TODO Remove everything after this
 bbGrades = json.loads(s.post('https://blackboard.andrew.cmu.edu/webapps/streamViewer/streamViewer', data={'cmd': 'loadStream', 'streamName': 'mygrades', 'forOverview': False, 'providers': {}}).content)
 
 # Sometimes blackboard fails for unknown reasons, raise exception in this case

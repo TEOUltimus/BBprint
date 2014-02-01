@@ -1,6 +1,7 @@
 from urlparse import urlparse
 from HTMLParser import HTMLParser
 from user import *
+from cryptor import decode
 import requests
 
 def authenticate(url):
@@ -21,7 +22,7 @@ def authenticate(url):
     # 2. Login to CMU's WebISO "Stateless" page
     s.headers = {'Host': 'login.cmu.edu', 'Referer': 'https://login.cmu.edu/idp/Authn/Stateless'}
     form = s.post('https://login.cmu.edu/idp/Authn/Stateless', 
-                  data={'j_username': USERNAME, 'j_password': PASSWORD, 
+                  data={'j_username': decode(USERNAME), 'j_password': decode(PASSWORD), 
                         'j_continue': '1', 'submit': 'Login'}).content
 	
     #print form
