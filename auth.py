@@ -1,3 +1,5 @@
+# auth.py library file from https://github.com/willcrichton/cmu-grades
+
 from urlparse import urlparse
 from HTMLParser import HTMLParser
 from user import *
@@ -25,7 +27,6 @@ def authenticate(url):
                   data={'j_username': decode(USERNAME), 'j_password': decode(PASSWORD), 
                         'j_continue': '1', 'submit': 'Login'}).content
 	
-    #print form
     # 3. Parse resultant HTML and send corresponding POST request
     # Here, if you were in a browser, you'd get fed an HTML form
     # that you don't actualy see--it submits instantly with some JS
@@ -55,7 +56,6 @@ def authenticate(url):
 
     # 4. Finish authentication by sending POST request
     result = s.post(parser.url, data=parser.to_post).content
-    #print result
     return s
 
 def usr():
