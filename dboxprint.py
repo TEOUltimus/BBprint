@@ -53,7 +53,7 @@ def url_manipulation(url):
 	filename = re.sub('%..[0-9]?', '', filename)
 	return filename
 
-def drop_box_print(fileurl = 'https://dl.dropboxusercontent.com/u/14522752/Presentation.pdf'):
+def dropbox_print(fileurl = 'https://dl.dropboxusercontent.com/u/14522752/Presentation.pdf'):
 	filename = url_manipulation(fileurl)
 	#if want specific subfolder of public, change this line (and create that subfolder when user installs)
 	dbdirectory = '/Public/'

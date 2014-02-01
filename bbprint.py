@@ -2,6 +2,7 @@
 from datetime import datetime
 from urllib import urlencode
 from cryptor import encode
+from dboxprint import dropbox_print
 import re, json, os, sys
 
 # check for credentials, encode and store them if found
@@ -23,9 +24,11 @@ from auth import authenticate
 
 s = authenticate('https://blackboard.andrew.cmu.edu')
 #print 'Blackboard authentication failed.  Ensure your username and password are correct.'
-print s.get('https://blackboard.andrew.cmu.edu/webapps').text
 
-#TODO Remove everything after this
+
+'''print s.get('https://blackboard.andrew.cmu.edu/webapps').text
+
+TODO Remove everything after this
 bbGrades = json.loads(s.post('https://blackboard.andrew.cmu.edu/webapps/streamViewer/streamViewer', data={'cmd': 'loadStream', 'streamName': 'mygrades', 'forOverview': False, 'providers': {}}).content)
 
 # Sometimes blackboard fails for unknown reasons, raise exception in this case
@@ -34,3 +37,4 @@ if len(bbGrades['sv_extras']['sx_filters']) == 0:
 
 for course_id, course in bbGrades['sv_extras']['sx_filters'][0]['choices'].iteritems():
 	print course
+'''
