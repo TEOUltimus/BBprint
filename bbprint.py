@@ -22,7 +22,7 @@ from auth import authenticate
 
 s = authenticate('https://blackboard.andrew.cmu.edu')
 #print 'Blackboard authentication failed.  Ensure your username and password are correct.'
-#print s.get('https://blackboard.andrew.cmu.edu/webapps').content
+print s.get('https://blackboard.andrew.cmu.edu/webapps').content
 
 #TODO Remove everything after this
 bbGrades = json.loads(s.post('https://blackboard.andrew.cmu.edu/webapps/streamViewer/streamViewer', data={'cmd': 'loadStream', 'streamName': 'mygrades', 'forOverview': False, 'providers': {}}).content)
