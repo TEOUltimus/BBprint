@@ -3,3 +3,4 @@ user.*
 *.pyc
 *.html
 *.swp
+*sdk*

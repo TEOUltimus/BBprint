@@ -25,6 +25,7 @@ from auth import authenticate
 s = authenticate('https://blackboard.andrew.cmu.edu')
 #print 'Blackboard authentication failed.  Ensure your username and password are correct.'
 
+dropbox_print(s, 'https://blackboard.andrew.cmu.edu/bbcswebdav/pid-609620-dt-content-rid-4015720_1/courses/S14-12623/Preview%20of%20%E2%80%9Cassignment1%E2%80%9D%281%29.pdf')
 
 '''print s.get('https://blackboard.andrew.cmu.edu/webapps').text
 

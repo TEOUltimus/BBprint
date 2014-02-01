@@ -25,9 +25,9 @@ def doWeAlreadyHaveThisFile(dir, fname):
 #Save the file at the url locally in the directory this code is saved in
 #Concatenate DB's Public folder with filename to create a path in DB
 #Then save the file to that path
-def downloadFile(url, dir, fname):
-	urllib.urlretrieve(url, fname) #local save
-	#authenticated_download(url, fname)
+def downloadFile(url, dir, fname, session=None):
+	#urllib.urlretrieve(url, fname) #local save
+	authenticated_download(url, fname, session)
 	path = dir + fname #concatenate
 	with open(fname, 'rb') as f:
 		response = dc.put_file(path, f) #DB save
@@ -53,10 +53,10 @@ def url_manipulation(url):
 	filename = re.sub('%..[0-9]?', '', filename)
 	return filename
 
-def dropbox_print(fileurl = 'https://dl.dropboxusercontent.com/u/14522752/Presentation.pdf'):
+def dropbox_print(session, fileurl = 'https://dl.dropboxusercontent.com/u/14522752/Presentation.pdf'):
 	filename = url_manipulation(fileurl)
 	#if want specific subfolder of public, change this line (and create that subfolder when user installs)
 	dbdirectory = '/Public/'
 	if not doWeAlreadyHaveThisFile(dbdirectory,filename):
-		downloadFile(fileurl, dbdirectory,filename)
+		downloadFile(fileurl, dbdirectory,filename,session)
 
