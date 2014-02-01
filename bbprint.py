@@ -15,7 +15,7 @@ try:
 except:
 	print 'Username and password not detected.'
 
-#from auth import authenticate
-import auth
+from auth import authenticate
 
-auth.usr()
+s = authenticate('https://blackboard.andrew.cmu.edu')
+print s
