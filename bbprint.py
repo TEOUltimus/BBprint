@@ -2,7 +2,7 @@
 from datetime import datetime
 from urllib import urlencode
 import re, json, os, sys
-print os.getcwd()
+#print os.getcwd()
 try:
 	usr = sys.argv.index('-u') + 1
 	pwd = sys.argv.index('-p') + 1
@@ -13,17 +13,16 @@ try:
 	credentials.write('PASSWORD = \'' + password + '\'\n')
 	credentials.close()
 except:
-	print 'Username and password not detected.'
+	usr = 1
+	#print 'Username and password not detected.'
 
 from auth import authenticate
 
 s = authenticate('https://blackboard.andrew.cmu.edu')
-#print s
+print s.get('https://blackboard.andrew.cmu.edu/webapps').content
 
 #TODO Remove
 bbGrades = json.loads(s.post('https://blackboard.andrew.cmu.edu/webapps/streamViewer/streamViewer', data={'cmd': 'loadStream', 'streamName': 'mygrades', 'forOverview': False, 'providers': {}}).content)
-
-print s.get('https://blackboard.andrew.cmu.edu/').content
 
 # Sometimes blackboard fails for unknown reasons, raise exception in this case
 if len(bbGrades['sv_extras']['sx_filters']) == 0:
