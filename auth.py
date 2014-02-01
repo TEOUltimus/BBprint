@@ -23,7 +23,8 @@ def authenticate(url):
     form = s.post('https://login.cmu.edu/idp/Authn/Stateless', 
                   data={'j_username': USERNAME, 'j_password': PASSWORD, 
                         'j_continue': '1', 'submit': 'Login'}).content
-
+	
+    #print form
     # 3. Parse resultant HTML and send corresponding POST request
     # Here, if you were in a browser, you'd get fed an HTML form
     # that you don't actualy see--it submits instantly with some JS
@@ -49,11 +50,11 @@ def authenticate(url):
     s.headers = {'Host':  urlparse(url).netloc,
                  'Origin': 'https://login.cmu.edu',
                  'Referer': 'https://login.cmu.edu/idp/profile/SAML2/Redirect/SSO',
-                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.14 Safari/537.36'}
+                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.14 Safari/537.36'}
 
     # 4. Finish authentication by sending POST request
-    s.post(parser.url, data=parser.to_post).content
-
+    result = s.post(parser.url, data=parser.to_post).content
+    #print result
     return s
 
 def usr():

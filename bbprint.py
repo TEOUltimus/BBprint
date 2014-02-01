@@ -18,4 +18,16 @@ except:
 from auth import authenticate
 
 s = authenticate('https://blackboard.andrew.cmu.edu')
-print s
+#print s
+
+#TODO Remove
+bbGrades = json.loads(s.post('https://blackboard.andrew.cmu.edu/webapps/streamViewer/streamViewer', data={'cmd': 'loadStream', 'streamName': 'mygrades', 'forOverview': False, 'providers': {}}).content)
+
+print s.get('https://blackboard.andrew.cmu.edu/').content
+
+# Sometimes blackboard fails for unknown reasons, raise exception in this case
+if len(bbGrades['sv_extras']['sx_filters']) == 0:
+	raise Exception('blackboard connection failed')
+
+for course_id, course in bbGrades['sv_extras']['sx_filters'][0]['choices'].iteritems():
+	print course
