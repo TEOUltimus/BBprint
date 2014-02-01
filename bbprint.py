@@ -1,11 +1,12 @@
 #from pyquery import PyQuery as pq
 from datetime import datetime
-from urllib import urlencode
+#from urllib import urlencode
 from cryptor import encode
 from dboxprint import dropbox_print
 import re, json, os, sys
 
 # check for credentials, encode and store them if found
+print('print')
 try:
 	usr = sys.argv.index('-u') + 1
 	pwd = sys.argv.index('-p') + 1
@@ -15,9 +16,9 @@ try:
 		credentials.write('USERNAME = 0x' + str(encode(username)) + '\n')
 		credentials.write('PASSWORD = 0x' + str(encode(password)) + '\n')
 except:
-	pass #no-op
-	print 'Username and password not detected. Loading stored credentials.'
-	print 'If you want to use a new username and password use the \'-u\' and \'-p\' tags.'
+	#pass #no-op
+	print('Username and password not detected. Loading stored credentials.')
+	print('If you want to use a new username and password use the \'-u\' and \'-p\' tags.')
 
 from auth import authenticate
 s = authenticate('https://blackboard.andrew.cmu.edu')
