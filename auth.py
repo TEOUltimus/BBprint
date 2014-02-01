@@ -55,3 +55,7 @@ def authenticate(url):
     s.post(parser.url, data=parser.to_post).content
 
     return s
+
+def usr():
+	print USERNAME
+	print PASSWORD
