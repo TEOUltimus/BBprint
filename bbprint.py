@@ -17,7 +17,7 @@ try:
 except:
 	pass #no-op
 	print 'Username and password not detected. Loading stored credentials.'
-	print 'If you want to use a new username and password use the \'-u\' and \'-p\' tags'
+	print 'If you want to use a new username and password use the \'-u\' and \'-p\' tags.'
 
 from auth import authenticate
 s = authenticate('https://blackboard.andrew.cmu.edu')
